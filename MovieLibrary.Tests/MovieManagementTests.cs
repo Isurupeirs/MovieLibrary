@@ -26,9 +26,9 @@ namespace MovieLibrary.Tests
         }
 
         // Helper - creates a simple test movie
-        private Movie SampleMovie(string id = "M1", string title = "Inception")
+        private Movie SampleMovie(string id = "M1", string title = "Fast and Furious 7")
         {
-            return new Movie(id, title, "Nolan", "Sci-Fi", 2010);
+            return new Movie(id, title, "Nolan", "Action", 2010);
         }
 
         // TEST 1 - Adding a valid movie should store it correctly
@@ -46,7 +46,7 @@ namespace MovieLibrary.Tests
             // Assert
             Assert.Single(all);
             Assert.Equal("M1", all[0].MovieID);
-            Assert.Equal("Inception", all[0].Title);
+            Assert.Equal("Fast and Furious 7", all[0].Title);
         }
 
         // TEST 2 - Duplicate ID should throw an error
@@ -55,7 +55,7 @@ namespace MovieLibrary.Tests
         {
             // Arrange
             MovieService service = CreateService();
-            service.AddMovie(SampleMovie("M1", "Inception"));
+            service.AddMovie(SampleMovie("M1", "Fast and Furious 7"));
 
             // Act and Assert
             Assert.Throws<InvalidOperationException>(() =>
@@ -70,8 +70,8 @@ namespace MovieLibrary.Tests
             MovieService service = CreateService();
 
             // Act
-            service.AddMovie(SampleMovie("M1", "Inception"));
-            service.AddMovie(SampleMovie("M2", "The Matrix"));
+            service.AddMovie(SampleMovie("M1", "Fast and Furious 7"));
+            service.AddMovie(SampleMovie("M2", "Jurassic World"));
             service.AddMovie(SampleMovie("M3", "Interstellar"));
 
             // Assert
