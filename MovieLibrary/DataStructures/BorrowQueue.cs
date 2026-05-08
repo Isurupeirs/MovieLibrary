@@ -16,9 +16,9 @@ namespace MovieLibrary.DataStructures
     public class BorrowQueue
     {
         // Each movie has its OWN waiting list
-        // KEY   = MovieID  e.g. "M001"
+        // KEY   = MovieID  e.g. "M1"
         // VALUE = Queue of usernames waiting for that movie
-        // e.g. "M001" -> ["Alice", "Bob", "Carol"]
+        // e.g. "M1" - ["Isuru", "Bob", "Carol"]
         private Dictionary<string, Queue<string>> waitingLists
             = new Dictionary<string, Queue<string>>();
 
