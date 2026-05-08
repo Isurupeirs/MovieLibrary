@@ -1,4 +1,8 @@
-﻿*   93188dc Initial commit: WPF project setup with .gitignore and README
+﻿*   9ea8990 Merge feature/movie-model: add Movie class and LinkedList
+|\  
+| * 07f0dc3 Add Movie class with MovieID, Title, Director, Genre, Year, IsAvailable properties
+|/  
+*   93188dc Initial commit: WPF project setup with .gitignore and README
 |\  
 | * 8db124c Initial commit
 * e81830a Initial commit: WPF project setup with .gitignore and README
