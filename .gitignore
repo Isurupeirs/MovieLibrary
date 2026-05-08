@@ -1,0 +1,14 @@
+﻿# Build output folders - no need to upload these
+bin/
+obj/
+
+# Visual Studio settings - personal to your machine
+.vs/
+*.user
+*.suo
+
+# Mac junk file
+.DS_Store
+
+# Test results
+TestResults/
