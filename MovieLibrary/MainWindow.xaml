@@ -3,10 +3,241 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MovieLibrary"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Movie Library Management System"
+        Height="620" Width="860">
+
+    <Grid Background="#f0f0f0">
+
+        <!-- TITLE -->
+        <Label Content="Movie Library Management System"
+               HorizontalAlignment="Left" Margin="10,5,0,0"
+               VerticalAlignment="Top"
+               FontFamily="Arial Black" FontSize="16"
+               Foreground="#2c3e50"/>
+
+      
+        <!-- SECTION 1: ADD NEW MOVIE -->
+       
+        <Label Content="Add New Movie"
+               HorizontalAlignment="Left" Margin="10,38,0,0"
+               VerticalAlignment="Top"
+               FontFamily="Arial Black" FontSize="12"
+               Foreground="#2980b9"/>
+
+        <!-- Labels above each input box -->
+        <Label Content="Movie ID"
+               HorizontalAlignment="Left" Margin="10,62,0,0"
+               VerticalAlignment="Top" FontSize="12"/>
+        <Label Content="Title"
+               HorizontalAlignment="Left" Margin="125,62,0,0"
+               VerticalAlignment="Top" FontSize="12"/>
+        <Label Content="Director"
+               HorizontalAlignment="Left" Margin="295,62,0,0"
+               VerticalAlignment="Top" FontSize="12"/>
+        <Label Content="Genre"
+               HorizontalAlignment="Left" Margin="460,62,0,0"
+               VerticalAlignment="Top" FontSize="12"/>
+        <Label Content="Year"
+               HorizontalAlignment="Left" Margin="590,62,0,0"
+               VerticalAlignment="Top" FontSize="12"/>
+
+        <!-- Input boxes — x:Name links them to the code-behind -->
+        <TextBox x:Name="TxtMovieID"
+                 HorizontalAlignment="Left" Margin="10,84,0,0"
+                 VerticalAlignment="Top" Width="105" FontSize="12"/>
+        <TextBox x:Name="TxtTitle"
+                 HorizontalAlignment="Left" Margin="125,84,0,0"
+                 VerticalAlignment="Top" Width="160" FontSize="12"/>
+        <TextBox x:Name="TxtDirector"
+                 HorizontalAlignment="Left" Margin="295,84,0,0"
+                 VerticalAlignment="Top" Width="155" FontSize="12"/>
+        <TextBox x:Name="TxtGenre"
+                 HorizontalAlignment="Left" Margin="460,84,0,0"
+                 VerticalAlignment="Top" Width="120" FontSize="12"/>
+        <TextBox x:Name="TxtYear"
+                 HorizontalAlignment="Left" Margin="590,84,0,0"
+                 VerticalAlignment="Top" Width="65" FontSize="12"/>
+
+        <!-- Add Movie button -->
+        <Button Content="Add Movie"
+                HorizontalAlignment="Left" Margin="665,84,0,0"
+                VerticalAlignment="Top" Width="90" FontSize="12"
+                Click="BtnAddMovie_Click"
+                Background="#27ae60" Foreground="White"/>
+
+      
+        <!-- SECTION 2: SEARCH AND SORT      -->
+       
+
+        <!-- Search by Title -->
+        <Label Content="Search Title:"
+               HorizontalAlignment="Left" Margin="10,118,0,0"
+               VerticalAlignment="Top" FontSize="12"/>
+        <TextBox x:Name="TxtSearchTitle"
+                 HorizontalAlignment="Left" Margin="100,118,0,0"
+                 VerticalAlignment="Top" Width="110" FontSize="12"/>
+        <Button Content="Linear Search"
+                HorizontalAlignment="Left" Margin="218,118,0,0"
+                VerticalAlignment="Top" Width="100" FontSize="12"
+                Click="BtnLinearSearch_Click"/>
+
+        <!-- Search by ID -->
+        <Label Content="Search ID:"
+               HorizontalAlignment="Left" Margin="328,118,0,0"
+               VerticalAlignment="Top" FontSize="12"/>
+        <TextBox x:Name="TxtSearchID"
+                 HorizontalAlignment="Left" Margin="408,118,0,0"
+                 VerticalAlignment="Top" Width="90" FontSize="12"/>
+        <Button Content="Binary Search"
+                HorizontalAlignment="Left" Margin="506,118,0,0"
+                VerticalAlignment="Top" Width="100" FontSize="12"
+                Click="BtnBinarySearch_Click"/>
+
+        <!-- Sort and utility buttons -->
+        <Button Content="Bubble Sort (Title)"
+                HorizontalAlignment="Left" Margin="10,148,0,0"
+                VerticalAlignment="Top" Width="135" FontSize="12"
+                Click="BtnBubbleSort_Click"
+                Background="#e67e22" Foreground="White"/>
+        <Button Content="Merge Sort (Year)"
+                HorizontalAlignment="Left" Margin="153,148,0,0"
+                VerticalAlignment="Top" Width="125" FontSize="12"
+                Click="BtnMergeSort_Click"
+                Background="#8e44ad" Foreground="White"/>
+        <Button Content="Show All"
+                HorizontalAlignment="Left" Margin="286,148,0,0"
+                VerticalAlignment="Top" Width="80" FontSize="12"
+                Click="BtnShowAll_Click"/>
+        <Button Content="Export JSON"
+                HorizontalAlignment="Left" Margin="374,148,0,0"
+                VerticalAlignment="Top" Width="95" FontSize="12"
+                Click="BtnExport_Click"
+                Background="#2980b9" Foreground="White"/>
+        <Button Content="Import JSON"
+                HorizontalAlignment="Left" Margin="477,148,0,0"
+                VerticalAlignment="Top" Width="95" FontSize="12"
+                Click="BtnImport_Click"
+                Background="#2980b9" Foreground="White"/>
+
+        <!-- Movie count label -->
+        <TextBlock x:Name="TxtMovieCount"
+                   HorizontalAlignment="Right" Margin="0,152,10,0"
+                   VerticalAlignment="Top" FontSize="12"
+                   Foreground="#2980b9" FontWeight="Bold"/>
+
+       
+        <!-- SECTION 3: MOVIE LIST           -->
         
+
+        <!-- DataGrid shows all movies in a table -->
+        <DataGrid x:Name="MovieDataGrid"
+                  HorizontalAlignment="Left" Margin="10,178,0,0"
+                  VerticalAlignment="Top" Width="835" Height="185"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  SelectionChanged="MovieDataGrid_SelectionChanged"
+                  RowBackground="White"
+                  AlternatingRowBackground="#ecf0f1"
+                  FontSize="12" FontFamily="Arial Narrow">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Movie ID"
+                                    Binding="{Binding MovieID}"
+                                    Width="75"/>
+                <DataGridTextColumn Header="Title"
+                                    Binding="{Binding Title}"
+                                    Width="*"/>
+                <DataGridTextColumn Header="Director"
+                                    Binding="{Binding Director}"
+                                    Width="165"/>
+                <DataGridTextColumn Header="Genre"
+                                    Binding="{Binding Genre}"
+                                    Width="85"/>
+                <DataGridTextColumn Header="Year"
+                                    Binding="{Binding ReleaseYear}"
+                                    Width="55"/>
+                <DataGridTextColumn Header="Status"
+                                    Binding="{Binding AvailabilityStatus}"
+                                    Width="75"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+     
+        <!-- SECTION 4: BORROW              -->
+       
+        <Label Content="Borrow Movie"
+               HorizontalAlignment="Left" Margin="10,370,0,0"
+               VerticalAlignment="Top"
+               FontFamily="Arial Black" FontSize="12"
+               Foreground="#2980b9"/>
+        <Label Content="Movie ID"
+               HorizontalAlignment="Left" Margin="10,394,0,0"
+               VerticalAlignment="Top" FontSize="12"/>
+        <TextBox x:Name="TxtBorrowID"
+                 HorizontalAlignment="Left" Margin="10,414,0,0"
+                 VerticalAlignment="Top" Width="110" FontSize="12"/>
+        <Label Content="Your Name"
+               HorizontalAlignment="Left" Margin="130,394,0,0"
+               VerticalAlignment="Top" FontSize="12"/>
+        <TextBox x:Name="TxtBorrowerName"
+                 HorizontalAlignment="Left" Margin="130,414,0,0"
+                 VerticalAlignment="Top" Width="110" FontSize="12"/>
+        <Button Content="Borrow"
+                HorizontalAlignment="Left" Margin="250,414,0,0"
+                VerticalAlignment="Top" Width="75" FontSize="12"
+                Click="BtnBorrow_Click"
+                Background="#27ae60" Foreground="White"/>
+
+      
+        <!-- SECTION 5: RETURN              -->
+     
+        <Label Content="Return Movie"
+               HorizontalAlignment="Left" Margin="355,370,0,0"
+               VerticalAlignment="Top"
+               FontFamily="Arial Black" FontSize="12"
+               Foreground="#2980b9"/>
+        <Label Content="Movie ID"
+               HorizontalAlignment="Left" Margin="355,394,0,0"
+               VerticalAlignment="Top" FontSize="12"/>
+        <TextBox x:Name="TxtReturnID"
+                 HorizontalAlignment="Left" Margin="355,414,0,0"
+                 VerticalAlignment="Top" Width="110" FontSize="12"/>
+        <Button Content="Return"
+                HorizontalAlignment="Left" Margin="475,414,0,0"
+                VerticalAlignment="Top" Width="75" FontSize="12"
+                Click="BtnReturn_Click"
+                Background="#e74c3c" Foreground="White"/>
+
+    
+        <!-- SECTION 6: WAITING LIST        -->
+   
+        <Label Content="Waiting List"
+               HorizontalAlignment="Left" Margin="580,370,0,0"
+               VerticalAlignment="Top"
+               FontFamily="Arial Black" FontSize="12"
+               Foreground="#2980b9"/>
+        <Label Content="Movie ID"
+               HorizontalAlignment="Left" Margin="580,394,0,0"
+               VerticalAlignment="Top" FontSize="12"/>
+        <TextBox x:Name="TxtQueueID"
+                 HorizontalAlignment="Left" Margin="580,414,0,0"
+                 VerticalAlignment="Top" Width="110" FontSize="12"/>
+        <Button Content="Check Queue"
+                HorizontalAlignment="Left" Margin="698,414,0,0"
+                VerticalAlignment="Top" Width="100" FontSize="12"
+                Click="BtnCheckQueue_Click"/>
+        <TextBlock x:Name="TxtQueueResult"
+                   HorizontalAlignment="Left" Margin="580,442,0,0"
+                   VerticalAlignment="Top" Width="270" FontSize="12"
+                   TextWrapping="Wrap" Foreground="#7f8c8d"/>
+
+        <!-- SECTION 7: STATUS BAR          -->
+
+        <TextBlock x:Name="TxtStatus"
+                   HorizontalAlignment="Left" Margin="10,575,0,0"
+                   VerticalAlignment="Top" Width="835" FontSize="12"
+                   Foreground="#2c3e50"
+                   Text="Ready. Add a movie or select one from the list."/>
     </Grid>
 </Window>
